@@ -1,0 +1,6 @@
+[workspace]
+members = [
+  "test_macro",
+  "tests"
+]
+resolver = "2"
