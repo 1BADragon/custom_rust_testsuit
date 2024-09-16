@@ -1,8 +1,0 @@
-[package]
-name = "test_macro_test"
-version = "0.1.0"
-edition = "2021"
-
-[dependencies]
-inventory = "0.3.15"
-test_macro = {path = "../test_macro"}

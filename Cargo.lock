@@ -38,19 +38,29 @@ dependencies = [
 ]
 
 [[package]]
-name = "test_macro"
-version = "0.1.0"
-dependencies = [
- "quote",
- "syn",
-]
-
-[[package]]
-name = "test_macro_test"
+name = "testigo"
 version = "0.1.0"
 dependencies = [
  "inventory",
- "test_macro",
+ "testigo_macro",
+ "testigo_types",
+]
+
+[[package]]
+name = "testigo_macro"
+version = "0.1.0"
+dependencies = [
+ "inventory",
+ "quote",
+ "syn",
+ "testigo_types",
+]
+
+[[package]]
+name = "testigo_types"
+version = "0.1.0"
+dependencies = [
+ "inventory",
 ]
 
 [[package]]

@@ -1,0 +1,10 @@
+[package]
+name = "testigo"
+version.workspace = true
+edition = "2021"
+
+[dependencies]
+inventory = { workspace = true }
+testigo_types = { path = "../testigo_types" }
+testigo_macro = { path = "../testigo_macro" }
+

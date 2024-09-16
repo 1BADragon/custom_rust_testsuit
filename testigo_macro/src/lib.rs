@@ -1,9 +1,9 @@
 use proc_macro::TokenStream;
 use quote::quote;
-use syn::{parse::Parser, parse_macro_input, spanned::Spanned, Expr, ItemFn, Lit};
+use syn::{parse::Parser, parse_macro_input, spanned::Spanned, Expr, ItemFn, Lit, LitStr};
 
 #[proc_macro_attribute]
-pub fn my_test(attr: TokenStream, item: TokenStream) -> TokenStream {
+pub fn testigo(attr: TokenStream, item: TokenStream) -> TokenStream {
     let args = syn::punctuated::Punctuated::<syn::MetaNameValue, syn::Token![,]>::parse_terminated
         .parse(attr)
         .unwrap();
@@ -24,15 +24,20 @@ pub fn my_test(attr: TokenStream, item: TokenStream) -> TokenStream {
 
     let ident = &input_fn.sig.ident;
 
-    let name = name_opt.unwrap();
+    let name = name_opt.unwrap_or(LitStr::new(
+        &input_fn
+            .sig
+            .ident
+            .span()
+            .source_text()
+            .expect("Failed to get function name"),
+        input_fn.sig.ident.span(),
+    ));
 
     let output = quote! {
         #input_fn
 
-        inventory::submit!(Test{
-            name: #name,
-            f: #ident
-       });
+        inventory::submit!(testigo_types::Test::new(#name, #ident));
     };
 
     output.into()
